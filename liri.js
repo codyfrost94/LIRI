@@ -1,3 +1,4 @@
+var fs = require('fs')
 var keys = require('./keys.js');
 var request = require('request');
 var input = process.argv[2];
@@ -46,25 +47,37 @@ if (input === "my-tweets") {
             if (error) {
                 return console.log('Error occurred: ' + error);
             }
-            
-           //for some reason if I try to pull information from response.body.Title or anything else like that its always undefined.
+
+            //for some reason if I try to pull information from response.body.Title or anything else like that its always undefined.
             console.log(response.body);
         });
-    }
-
-    else {
-    	request('http://www.omdbapi.com/?apikey=40e9cece&t=Mr+Nobody', function(error, response, body) {
+    } else {
+        request('http://www.omdbapi.com/?apikey=40e9cece&t=Mr+Nobody', function(error, response, body) {
             if (error) {
                 return console.log('Error occurred: ' + error);
             }
-            
-           //for some reason if I try to pull information from response.body.Title or anything else like that its always undefined.
+
+            //for some reason if I try to pull information from response.body.Title or anything else like that its always undefined.
             console.log(response.body);
         });
     }
 
 } else if (input === "do-what-it-says") {
+    fs.readFile("random.txt", "utf8", function(error, data) {
+            if (error) {
+                return console.log(error);
+            }
+            var dataArr = data.split(",");
+            var input = dataArr[0];
+            var songOrMovie = dataArr[1];
 
-} else {
-    console.log("That's not a command!")
-}
+            // not really sure how to make it run again with these arguments
+
+            console.log(dataArr)
+        });
+
+    }
+
+  else{
+  	console.log("That's not a command!")
+  }
